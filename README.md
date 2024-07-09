@@ -4,60 +4,39 @@
 
 Bem-vindo(a) ao desafio de orquestração de microserviços usando AWS Step Functions, Lambdas e S3. Aqui, você usará o Serverless Framework e Python para criar e gerenciar seus recursos AWS.
 
-
-
 ## Objetivo
 
-O desafio envolve a criação de um fluxo orquestrado por uma state machine no qual:
+O desafio envolve a criação de um fluxo orquestrado por uma *state machine* AWS Step Function, no qual:
 
-1. **Lambda 1:** Esta função deve buscar um arquivo JSON de um bucket S3, ler seu conteúdo e realizar alguma transformação ou tratamento nos dados.
-2. **Lambda 2:** Esta função deve pegar o resultado tratado pelo Lambda 1 e salvar em formato CSV no mesmo bucket S3 (ou em um diferente, se preferir).
-
-O `serverless.yml` fornecido já estabelece a estrutura da state machine e das lambdas. Seu desafio é implementar a lógica dentro de cada lambda e garantir a passagem de dados entre elas através da state machine.
+1. **Lambda 1:** Esta função deve baixar um arquivo *csv* e salvar em um S3 Bucket.
+2. **Lambda 2:** Esta função deve recuperar o *csv* salvo na *lambda* anterior, calcular uma métrica e salvá-la em um banco de dados relacional.
 
 ### Requisitos
 
 1. **Lambda 1**:
-   - Deve ser capaz de receber um identificador de arquivo (por exemplo, o nome do arquivo) como entrada.
-   - Busque o arquivo JSON no bucket S3 utilizando o identificador.
+   - Deve ser capaz de receber um *link* de arquivo como entrada. Os possíveis *links* encontram-se no `link.txt`.
+   - Baixar o *csv* encontrado no *link* e salvá-lo em um S3 Bucket.
    - Transforme ou trate os dados conforme necessário.
-   - Retorne os dados tratados.
+   - Retorne as informações pertinentes para a segunda *lambda*.
 
 2. **Lambda 2**:
-   - Receba os dados tratados do Lambda 1.
-   - Salve os dados em formato CSV no bucket S3.
+   - Recebe as informações da primeira *lambda*.
+   - Calcula o número de mortos em acidentes que envolveram os seguintes veículos: 'automovel', 'bicicleta', 'caminhao', 'moto' e 'onibus'.
+   - Salve os dados em formato em uma tabela em um banco relacional.
+   - Faça um retorno significativo para o usuário.
 
 ### Formato de Saída
 
-Para a saída gerada pela segunda lambda, esperamos um arquivo CSV que cumpra as seguintes especificações:
+Para a saída gerada pela segunda lambda, esperamos uma tabela que cumpra as seguintes especificações:
 
-1. **Nome do Arquivo**:
-   - O arquivo deve ter o nome no formato `processed_data_NOME_DO_CANDIDATO.csv`, onde `NOME_DO_CANDIDATO` deve ser substituído pelo seu nome completo sem espaços (por exemplo, `processed_data_JoaoSilva.csv`).
-
-2. **Colunas**:
-   - 'created_at', 'origin_id', 'destination_id', 'date', 'operator_id', 'white_label_request', 'channel', 'operator_name', 'is_mobile', 'numberOfOptions', 'origin_name', 'destination_name'
-
-3. **Dados**:
-   - Todos os dados do CSV devem ser extraídos de um arquivo `.json` cujo nome será fornecido junto com as credenciais e identificação dos recursos.
-
-
+1. **Colunas**:
+   - 'created_at', 'road_name', 'vehicle', 'number_deaths'
 
 #### **Desenvolvimento**:
 
-1. Baseado no `serverless.yml` fornecido, escreva o código Python para ambas as lambdas seguindo os requisitos.
-2. Certifique-se de que a state machine esteja corretamente
-
- configurada para passar os dados entre os Lambdas.
-
-#### **Deploy**:
-
-1. Use o Serverless Framework para realizar o deploy dos recursos na AWS.
-
-#### **Testes**:
-
-1. Crie e carregue um arquivo JSON teste no bucket S3.
-2. Use a função Python fornecida para iniciar a state machine.
-3. Verifique se o CSV foi gerado corretamente no bucket.
+1. Escreva o código Python para ambas as lambdas seguindo os requisitos.
+2. Fornceça um arquivo `serverless.yml`, contendo as informações para o *deploy* tanto dos recursos da *lambda*, quanto da Step Function.
+3. Certifique-se de que todos os arquivos necessários, como Docker, estejam na sua entrega.
 
 ### Envio
 
@@ -68,11 +47,14 @@ Para a saída gerada pela segunda lambda, esperamos um arquivo CSV que cumpra as
 ## Critérios de Avaliação
 
 1. **Código**: Qualidade, clareza e eficiência.
-2. **Integração com S3**: As lambdas devem interagir corretamente com o S3.
+2. **Integração com S3**: As lambdas devem interagir corretamente com os recursos externos e devem executar o seu objetivo.
 3. **Fluxo Orquestrado**: A state machine deve garantir a passagem correta de dados entre os Lambdas.
-4. **Documentação**: Quaisquer suposições ou alterações feitas devem ser bem documentadas.
+4. **Segurança**: As credenciais e variáveis de ambiente seguem as melhores práticas.
+5. **Documentação**: Quaisquer suposições ou alterações feitas devem ser bem documentadas.
 
+### Recursos
 
+Não serão disponibilizados recursos de *cloud* para a execução deste desafio.
 
 ## Bônus de Avaliação
 
