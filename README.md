@@ -35,7 +35,7 @@ Para a saída gerada pela segunda lambda, esperamos uma tabela que cumpra as seg
 #### **Desenvolvimento**:
 
 1. Escreva o código Python para ambas as lambdas seguindo os requisitos.
-2. Fornceça um arquivo `serverless.yml`, contendo as informações para o *deploy* tanto dos recursos da *lambda*, quanto da Step Function.
+2. Forneça um arquivo `serverless.yml`, contendo as informações para o *deploy* tanto dos recursos da *lambda*, quanto da Step Function.
 3. Certifique-se de que todos os arquivos necessários, como Docker, estejam na sua entrega.
 
 ### Envio
