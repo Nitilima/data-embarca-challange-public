@@ -54,7 +54,7 @@ Para a saída gerada pela segunda lambda, esperamos uma tabela que cumpra as seg
 
 ### Recursos
 
-Não serão disponibilizados recursos de *cloud* para a execução deste desafio.
+Não serão disponibilizados recursos de *cloud* para a execução deste desafio. Em todo o caso, o candidato pode criar uma conta gratuitamente e todos os recursos que são requisitos para este desafio tem disponibilidade de [uso gratuito](https://aws.amazon.com/pt/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all). Ressalta-se, que cada serviço da AWS tem um limite de gratuidade e é de responsabilidade do candidato a administração destes recursos.
 
 ## Bônus de Avaliação
 
