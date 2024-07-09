@@ -1,4 +1,0 @@
-pandas
-boto3==1.26.61
-botocore==1.29.61
-numpy==1.24.1

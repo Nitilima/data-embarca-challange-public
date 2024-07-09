@@ -14,7 +14,7 @@ O desafio envolve a criação de um fluxo orquestrado por uma *state machine* AW
 ### Requisitos
 
 1. **Lambda 1**:
-   - Deve ser capaz de receber um *link* de arquivo como entrada. Os possíveis *links* encontram-se no `link.txt`.
+   - Deve ser capaz de receber um *link* de arquivo como entrada. Os possíveis *links* encontram-se no `link.yml`.
    - Baixar o *csv* encontrado no *link* e salvá-lo em um S3 Bucket.
    - Transforme ou trate os dados conforme necessário.
    - Retorne as informações pertinentes para a segunda *lambda*.
