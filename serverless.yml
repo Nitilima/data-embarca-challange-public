@@ -1,0 +1,34 @@
+service: aws-step-functions-challenge
+
+provider:
+  name: aws
+  runtime: python3.8
+  environment:
+    BUCKET_NAME: ${env:BUCKET_NAME}
+    DB_PATH: ${env:DB_PATH}
+
+functions:
+  lambda1:
+    handler: lambdas/lambda_1.lambda1
+    events:
+      - http:
+          path: lambda1
+          method: post
+
+  lambda2:
+    handler: lambdas/lambda_2.lambda2
+
+stepFunctions:
+  stateMachines:
+    myStateMachine:
+      definition:
+        StartAt: Lambda1
+        States:
+          Lambda1:
+            Type: Task
+            Resource: arn:aws:lambda:region:account-id:function:aws-step-functions-challenge-dev-lambda1
+            Next: Lambda2
+          Lambda2:
+            Type: Task
+            Resource: arn:aws:lambda:region:account-id:function:aws-step-functions-challenge-dev-lambda2
+            End: true
